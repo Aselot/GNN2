@@ -133,3 +133,9 @@ dmypy.json
 /.idea/misc.xml
 /.idea/modules.xml
 /.idea/vcs.xml
+/out/production/Aufgabe4/FileIO.class
+/out/production/Aufgabe4/ImagePanel.class
+/out/production/Aufgabe4/InputOutput.class
+/out/production/Aufgabe4/MainFrame.class
+/out/production/Aufgabe4/Network.class
+/out/production/Aufgabe4/Neuron.class
