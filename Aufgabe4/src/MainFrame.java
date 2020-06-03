@@ -83,7 +83,6 @@ public class MainFrame extends JFrame {
 
     // --- computeConvolution() ----------------------------------
     void computeConvolution(int x, int y) {
-        double sum = 0;
         out[0][0] = getPixel(x - 1, y - 1);
         out[0][1] = getPixel(x, y - 1);
         out[0][2] = getPixel(x + 1, y - 1);
@@ -99,12 +98,12 @@ public class MainFrame extends JFrame {
         // --- activate first convolutional layer with ReLu output
 
         // Eine Convolution => benötige noch X convolutions für ImgHeight,ImgWidth (weitere Schleife)
-        for (int i = 0; i < 3; i++) {
-
-            for (int j = 0; j < 3; j++) {
-                sum += i == 0 ? out[0][j] * convWeight[i][j] : out[0][j + 3] * convWeight[i][j + 3];
+        for (int neuron = 0; neuron < NEURONS; neuron++) {
+            double sum = 0;
+            for (int pixel = 0; pixel < PIXEL; pixel++) {
+                sum += out[0][pixel] * convWeight[neuron][pixel];
             }
-            out[1][1] = reLu(sum);
+            out[1][neuron] = reLu(sum);
         }
 
         // ---------------------------------------------------------------------
@@ -168,8 +167,9 @@ public class MainFrame extends JFrame {
     }
 
     public void myMain() {
-        String abs = "C:\\Users\\aygun\\IdeaProjects\\GNN\\Aufgabe4/";
-        FileIO inFile = new FileIO(abs + "lena.ppm");
+        //String abs = "C:\\Users\\aygun\\IdeaProjects\\GNN\\Aufgabe4/";
+        FileIO inFile = new FileIO("/Users/patrickhentschel/PR1-SS20/Abgaben/J.Hilpisch/GitProjekt/GNN/Aufgabe4/lena.ppm");
+        //FileIO inFile = new FileIO(abs + "lena.ppm");na
         readImage(inFile);
 
         for (int y = 0; y < yRes; y++) {
